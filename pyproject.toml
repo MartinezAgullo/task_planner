@@ -1,0 +1,23 @@
+[tool.poetry]
+name = "task-planner"
+version = "0.1.0"
+description = ""
+authors = ["MartinezAgullo <pablo.martinez.agullo@gmail.com>"]
+readme = "README.md"
+packages = [{include = "task_planner", from = "src"}]
+
+[tool.poetry.dependencies]
+python = "^3.9"
+fastapi = "^0.115.12"
+pydantic = ">=2.0"
+
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.3.5"
+pytest-asyncio = "^0.26.0"
+httpx = "^0.28.1"
+uvicorn = "^0.34.2"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
