@@ -5,12 +5,12 @@ from task_planner.domain.task import Task
 def test_create_task_sets_defaults():
     task = Task.create(title="Test", description="Desc", priority=1)
 
-    assert isinstance(task.id, UUID)  # Checks that `id` is a valid UUID
+    assert isinstance(task.id, UUID)
     assert task.title == "Test"
     assert task.description == "Desc"
     assert task.priority == 1
     assert task.completed is False
-    assert task.dependencies == []  # Should be empty by default
+    assert task.dependencies == []
     assert task.created_at is not None
     assert task.updated_at is not None
 
@@ -21,6 +21,4 @@ def test_add_dependency():
 
     task.add_dependency(dep_id)
 
-    assert (
-        dep_id in task.dependencies
-    )  # Checks that dep_id is now in the dependencies list
+    assert dep_id in task.dependencies

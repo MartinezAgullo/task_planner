@@ -7,15 +7,15 @@ It follows **hexagonal architecture** (also known as **Ports and Adapters**) and
 
 ## 📁 Project Structure
 ```
-task_planner/\
+task_planner\
 ├── pyproject.toml\
-├── src/\
-│ └── task_planner/\
+├── src\
+│ └── task_planner\
 │ ├── domain/ # Entities and interfaces (Ports)\
 │ ├── application/ # Use cases (Application logic)\
 │ ├── driven/ # Driven adapters (e.g. DB implementations)\
 │ └── driving/ # Driving adapters (e.g. FastAPI HTTP controllers)\
-└── tests/\
+└── tests\
 ├── unit/ # Pure domain tests\
 └── integration/ # API/infra-level tests
 
@@ -75,7 +75,6 @@ The following checks are included:
 -   ✅ `end-of-file-fixer` --- Ensures newline at end of files
 
 
-```
 
 
 ---
