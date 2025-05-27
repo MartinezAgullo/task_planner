@@ -10,6 +10,8 @@ packages = [{include = "task_planner", from = "src"}]
 python = "^3.9"
 fastapi = "^0.115.12"
 pydantic = ">=2.0"
+sqlalchemy = "^2.0.41"
+asyncpg = "^0.30.0"
 
 
 [tool.poetry.group.dev.dependencies]
@@ -24,4 +26,18 @@ requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.pytest.ini_options]
-pythonpath = ["src"]
+pythonpath = ["organizer"]
+testpaths = ["organizer/task_planner/tests"]
+python_files = ["test_*.py"]
+norecursedirs = [
+    ".*",
+    "build",
+    "dist",
+    "venv",
+    "__pycache__",
+    "organizer/task_planner/driven/postgres_repository/boot"
+]
+
+
+[tool.mypy]
+mypy_path = "organizer"

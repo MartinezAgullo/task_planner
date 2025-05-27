@@ -20,5 +20,25 @@ dist/
 # VSCode project settings
 .vscode/
 
-# pre-commit logs
+# pre-commit backup files
 .pre-commit-config.yaml~
+
+# Test coverage reports
+htmlcov/
+.coverage
+.coverage.*
+
+# Logs and local state
+*.log
+*.sqlite3
+
+# MacOS and system files
+.DS_Store
+Thumbs.db
+
+# Local env and credentials
+.env
+.env.*
+
+# alembic
+alembic/versions/*.pyc
