@@ -12,6 +12,8 @@ fastapi = "^0.115.12"
 pydantic = ">=2.0"
 sqlalchemy = "^2.0.41"
 asyncpg = "^0.30.0"
+tree = "^0.2.4"
+dependency-injector = "^4.47.1"
 
 
 [tool.poetry.group.dev.dependencies]
@@ -27,7 +29,7 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.pytest.ini_options]
 pythonpath = ["organizer"]
-testpaths = ["organizer/task_planner/tests"]
+testpaths = ["organizer/tests"]
 python_files = ["test_*.py"]
 norecursedirs = [
     ".*",
