@@ -3,31 +3,32 @@ from pathlib import Path
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-
 from organizer.task_planner.boot.injectors.app.injector import AppContainer
-from organizer.task_planner.driving.http_client.routes import add_routers
+from organizer.task_planner.driving.api_rest.routes.task_routes import (
+    router as task_router,
+)
 from organizer.task_planner.boot.handlers.exception_handlers import add_handlers
 
-# Resolve the base path of the current file
 base_path = Path(__file__).resolve().parent
-
-# Set the path where config and i18n files are located
 yaml_path = base_path / "resources"
-# If you implement a GlobalContext, you can store the YAML path here
-# GlobalContext().set_var("yaml_files_path", str(yaml_path))
 
-# Create FastAPI app
-app = FastAPI()
+app = FastAPI(
+    title="Task Planner API",
+    version="1.0.0",
+    docs_url="/docs",
+    redoc_url=None,
+    openapi_tags=[
+        {"name": "Tasks", "description": "Operations related to task management"}
+    ],
+)
 
-
-# Enable CORS for allowed origins (adapt to your frontend URLs)
 origins = [
     "http://localhost",
-    "http://localhost:3000",  # React por defecto
-    "http://localhost:4200",  # Angular por defecto
-    "http://localhost:5173",  # Vite (Vue/React moderno)
+    "http://localhost:3000",
+    "http://localhost:4200",
+    "http://localhost:5173",
     "http://127.0.0.1",
-    "http://127.0.0.1:8000",  # Por si accedes al backend directamente en navegador
+    "http://127.0.0.1:8000",
 ]
 
 app.add_middleware(
@@ -38,14 +39,17 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Initialize and attach the DI container
 app_container = AppContainer()
+app_container.init_resources()
 app.app_container = app_container
 
+logger = app_container.logger()
+logger.info("Task Planner API started")
 
-# Attach use cases to the app context if needed
-app.task_use_case = app_container.task_use_case()
 
-# Register exception handlers and routers
+def add_routers(app: FastAPI) -> None:
+    app.include_router(task_router)
+
+
 add_handlers(app)
 add_routers(app)

@@ -7,7 +7,7 @@ from organizer.task_planner.driving.api_rest.dto.create_task_dto import (
 
 def to_domain(dto: CreateTaskRequestDTO) -> Task:
     return Task(
-        name=dto.name,
+        title=dto.title,
         description=dto.description,
         due_date=dto.due_date,
         priority=dto.priority,
@@ -18,7 +18,7 @@ def to_domain(dto: CreateTaskRequestDTO) -> Task:
 def from_domain(task: Task) -> CreateTaskResponseDTO:
     return CreateTaskResponseDTO(
         id=task.id,
-        name=task.name,
+        title=task.title,
         description=task.description,
         due_date=task.due_date,
         priority=task.priority,

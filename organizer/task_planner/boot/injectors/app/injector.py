@@ -1,3 +1,5 @@
+import logging
+import sys
 from dependency_injector import containers, providers
 
 from organizer.task_planner.application.services.task_management_use_case import (
@@ -11,6 +13,16 @@ from organizer.task_planner.application.services.task_management_use_case import
 )
 
 
+def init_logger() -> logging.Logger:
+    """Configure and return a logger instance."""
+    logging.basicConfig(
+        level=logging.INFO,
+        format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
+        handlers=[logging.StreamHandler(sys.stdout)],
+    )
+    return logging.getLogger("taskplanner")
+
+
 class AppContainer(containers.DeclarativeContainer):
     """Dependency injection container for the Task Planner app."""
 
@@ -20,6 +32,9 @@ class AppContainer(containers.DeclarativeContainer):
             "organizer.task_planner.driving.api_rest.adapters",
         ]
     )
+
+    # Logger provider
+    logger = providers.Resource(init_logger)
 
     # Use case providers
     create_task_use_case = providers.Factory(create_task)
