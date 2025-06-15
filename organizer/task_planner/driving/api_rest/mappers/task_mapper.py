@@ -1,5 +1,5 @@
 from organizer.task_planner.domain.models.task import Task
-from organizer.task_planner.api_rest.dto.create_task_dto import (
+from organizer.task_planner.driving.api_rest.dto.create_task_dto import (
     CreateTaskRequestDTO,
     CreateTaskResponseDTO,
 )
